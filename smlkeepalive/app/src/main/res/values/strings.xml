@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">smlkeepalive</string>
+    <string name="keepalive">成功开启应用保活</string>
+    <string name="keepalivefailure">开启应用保活失败</string>
 </resources>

@@ -21,9 +21,20 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.sml.zhuolin.test.Action"/>
+                <action android:name="com.sml.zhuolin.test.Action" />
             </intent-filter>
         </service>
+
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

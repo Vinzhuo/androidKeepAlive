@@ -28,9 +28,9 @@ public class KeepAliveUtils {
         }
     }
 
-    public static void keepAlive(Context context, Class service, @NonNull String action) {
+    public static boolean keepAlive(Context context, Class service, @NonNull String action) {
         if (Build.VERSION.SDK_INT > 19 || getKeepAlivePid() > 0) {
-            return;
+            return false;
         }
         Intent intent = new Intent(context, service);
         if (!TextUtils.isEmpty(action)) {
@@ -38,9 +38,10 @@ public class KeepAliveUtils {
         }
         int pid = KeepAlive.start(context, intent, 10);
         if (pid <= 0) {
-            return;
+            return false;
         }
         keepAlivePid = pid;
+        return true;
     }
 
     private static int getKeepAlivePid() {
