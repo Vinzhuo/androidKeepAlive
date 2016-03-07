@@ -28,8 +28,19 @@ public class MyService extends Service {
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
         this.registerReceiver(receiver, intentFilter);
-        this.startForeground(ONGONGING, new Notification());
+        keepForground();
         KeepAliveUtils.keepAlive(this, MyService.class, MyService.KEEP_ALIVE_ACTION);
+    }
+
+    private void keepForground() {
+        try {
+            Notification notification = new Notification();
+            notification.flags |= Notification.FLAG_NO_CLEAR;
+            notification.flags |= Notification.FLAG_ONGOING_EVENT;
+            startForeground(0, notification); // 设置为前台服务避免kill，Android4.3及以上需要设置id为0时通知栏才不显示该通知；
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
     public static void start(Context context) {
